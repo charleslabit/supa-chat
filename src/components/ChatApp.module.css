@@ -1,0 +1,54 @@
+.chatBackground {
+  inset: 0;
+  background: linear-gradient(to bottom, #800040, #4a0033);
+  overflow: hidden;
+  z-index: 1;
+  border-radius: 0;
+  height: 100vh;
+  justify-content: space-between;
+}
+
+.heart {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 0, 102, 0.6);
+  clip-path: path(
+    "M24 4C24 1.8 22.2 0 20 0C17.6 0 16 1.8 16 4C16 1.8 14.4 0 12 0C9.8 0 8 1.8 8 4C8 8 12 12 12 12L16 16L20 12C20 12 24 8 24 4Z"
+  );
+  animation: floatUp 5s infinite linear;
+  opacity: 0.8;
+  z-index: 1;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) scale(0.6);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1.2);
+    opacity: 0;
+  }
+}
+
+.chatBubble {
+  background-color: #ff1e6f;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 16px 16px 16px 4px;
+  max-width: fit-content;
+  font-weight: 500;
+}
+
+.chatBubbleSender {
+  background-color: #642765;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 16px 16px 16px 4px;
+  max-width: fit-content;
+  font-weight: 500;
+}
