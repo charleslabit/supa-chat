@@ -11,8 +11,12 @@ export const MessageInput = () => {
   const queryClient = useQueryClient();
   const [username] = useAtom(usernameAtom);
   const [selectedUser] = useAtom(selectedUserAtom);
-  const [message, setMessage] = useState("");
   const messageRef = useRef<HTMLInputElement>(null);
+  const [message, setMessage] = useState("");
+
+  const handleInputChange = () => {
+    setMessage(messageRef.current?.value || "");
+  };
 
   const { mutate, isPending } = useMutation({
     mutationFn: async ({ message }: { message: string }) =>
@@ -22,7 +26,7 @@ export const MessageInput = () => {
         user: selectedUser,
       }),
     onSuccess: () => {
-      setMessage("");
+      messageRef.current!.value = "";
       queryClient.invalidateQueries({ queryKey: ["messages", username] });
     },
   });
@@ -39,6 +43,7 @@ export const MessageInput = () => {
       <TextInput
         placeholder="Type a message..."
         ref={messageRef}
+        onChange={handleInputChange} // Track ref changes
         flex={1}
         autoFocus
         onKeyDown={(e) => {
@@ -48,12 +53,11 @@ export const MessageInput = () => {
           }
         }}
       />
-      {message && (
+      {message ? (
         <Button variant="transparent" onClick={handleSend} loading={isPending}>
           <IconSend size={18} />
         </Button>
-      )}
-      {!message && (
+      ) : (
         <Button
           variant="transparent"
           onClick={() => mutate({ message: "😄" })}
