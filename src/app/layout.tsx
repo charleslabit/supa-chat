@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Messenger",
+  title: "Supa Chat",
   description: "This is not messenger.",
 };
 
