@@ -2,12 +2,14 @@
 import { ChatSidebar } from "@/components/ChatSideBar";
 import { ChatWindow } from "@/components/ChatWindow";
 import { useMessages } from "@/hooks/useMessages";
+import { usernameAtom } from "@/store";
 import { Message } from "@/types";
 import { Grid } from "@mantine/core";
-import { useMemo, useState } from "react";
+import { useAtom } from "jotai";
+import { useMemo } from "react";
 
 export const ChatApp = () => {
-  const [userName] = useState("Guest");
+  const [userName] = useAtom(usernameAtom);
   const { data: messages = [], isLoading } = useMessages({
     username: userName,
   });

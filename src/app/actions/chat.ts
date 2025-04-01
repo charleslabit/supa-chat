@@ -5,13 +5,11 @@ import { Message } from "@/types";
 
 // Fetch messages from Supabase
 export async function fetchMessages({ username }: { username: string }) {
-  console.log("username", username);
   const { data, error } = await supabase
     .from("messages")
     .select("*")
     .order("created_at", { ascending: true })
     .or(`user_name.eq.${username},sender_name.eq.${username}`);
-  console.log("error", error);
   if (error) {
     console.error("Error fetching messages:", error);
     return [];
@@ -29,7 +27,6 @@ export async function sendMessage({
   sender: string;
   message: string;
 }) {
-  console.log("1", user, sender, message);
   if (!user.trim() || !sender.trim() || !message.trim()) {
     return { error: "User, sender, and message are required" };
   }
